@@ -26,7 +26,7 @@ app.mount("/rag/static", StaticFiles(directory="../pdf-documents"), name="static
 async def redirect_root_to_docs():
     return RedirectResponse("/docs")
 
-pdf_directory = "./pdf-documents"
+pdf_directory = "C:/Users/tusca/OneDrive/Documents/GitHub/LLMBootcamp/nextjsLLMapp-part1/pdf-documents"
 
 
 @app.post("/upload")
@@ -46,7 +46,7 @@ async def upload_files(files: list[UploadFile] = File(...)):
 @app.post("/load-and-process-pdfs")
 async def load_and_process_pdfs():
     try:
-        subprocess.run(["python", "C:/Users/tusca/OneDrive/Documents/GitHub/LLMBootcamp/nextjsLLMapp-part1/rag-data-loader/rag_load_and_process.py"], check=True)
+        subprocess.run(["python", "./rag-data-loader/rag_load_and_process.py"], check=True)
         return {"message": "PDFs loaded and processed successfully from backend"}
     except subprocess.CalledProcessError as e:
         return {"error": "Failed to execute script"}
